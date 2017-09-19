@@ -192,12 +192,14 @@ class Downloader
 	private function do_download()
 	{
 		$cmd = "youtube-dl";
-		$cmd .= " -o ".$this->config["outputFolder"]."/";
+		$cmd .= " -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best' -o ".$this->config["outputFolder"]."/";
+		#$cmd .= " -o ".$this->config["outputFolder"]."/";
 		$cmd .= escapeshellarg("%(title)s-%(uploader)s.%(ext)s");
 
 		if($this->audio_only)
 		{
-			$cmd .= " -x ";
+			#$cmd .= " -x ";
+			$cmd .= " --extract-audio --audio-format mp3 ";
 		}
 
 		foreach($this->urls as $url)
